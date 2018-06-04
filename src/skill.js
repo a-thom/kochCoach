@@ -22,16 +22,17 @@ class Skill {
     // create new AlexaRequest Instance.
     let alexaRequest = new AlexaReq( event );
 
-    let rezepte = await AlexaInitialisation.loadSpreadSheetVUI(config.spreadSheetVui, 'rezepte');
-    alexaRequest.dataBase = rezepte //member einer klasse muss nicht deklariert werden
+    // rezepte nur am Anfang laden
+    if(alexaRequest.dataBase == null){
+      let rezepte = await AlexaInitialisation.loadSpreadSheetVUI(config.spreadSheetVui, 'rezepte');
+      alexaRequest.dataBase = rezepte //member einer klasse muss nicht deklariert werden
+    }
 
     /** if initData is there skip API Initialisation */
     let alexaMainChain =
       //   initData ?
       //   Promise.resolve(initData) :
       AlexaInitialisation.loadSpreadSheetVUI( config.spreadSheetVui );
-
-      // TODO: rezepte nur am anfang laden
 
     let voiceResponse;
 
