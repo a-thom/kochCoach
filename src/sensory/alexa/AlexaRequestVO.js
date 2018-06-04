@@ -42,6 +42,11 @@ class AlexaRequestVO {
 		this._slots = {};
 		for ( let slot in slots ) { this._slots[ slot ] = slots[ slot ].value;}
 
+		// get resolution for slot
+		let slotResolution;
+		this._slotResolution = {};
+		for ( let slot in slots ) { this._slotResolution[ slot ] = slots[ slot ].resolutions.resolutionsPerAuthority[0].values[0].value.name;}
+
 		this._vReq     = {};
 		this._vRes     = {};
 		this._vResLoop = [];
@@ -121,6 +126,8 @@ class AlexaRequestVO {
 	get sessionId () { return this._sessionID; }
 
 	get slots () { return this._slots; }
+
+	get slotResolution () {return this._slotResolution}
 
 	get answer () { return this._answer; }
 

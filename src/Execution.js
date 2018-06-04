@@ -37,6 +37,10 @@ class Execution {
 		       Execution[ intentMethod ]( alexaRequest ) :
 		       Execution.GenericVuiRequest( alexaRequest );
 	}
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static GenericVuiRequest ( alexaRequest ) {
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Inspiration (alexaRequest) {
@@ -47,9 +51,17 @@ class Execution {
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
-	static GenericVuiRequest ( alexaRequest ) {
+	static Start (alexaRequest) {
+
+		console.log('slot: ' + JSON.stringify(alexaRequest.slots));
+		console.log('slotResolution: ' + JSON.stringify(alexaRequest.slotResolution));
+
+		alexaRequest.vRes = { name : 'dings'};
+
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
+
+
 
 }
 
