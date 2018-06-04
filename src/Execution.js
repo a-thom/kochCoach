@@ -41,12 +41,7 @@ class Execution {
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Inspiration (alexaRequest) {
 
-		console.log( alexaRequest.slots )
-
-		//iteration über Datenbank mit suche
-		// split um kommagetrente werte in array zu packen
-
-		alexaRequest.vRes = { test : alexaRequest.dataBase[0].name, bla: 'blabla'};
+		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[Math.floor(Math.random() * alexaRequest.dataBase.length)].name};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}

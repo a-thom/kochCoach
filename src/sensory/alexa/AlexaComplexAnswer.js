@@ -37,7 +37,7 @@ class AlexaComplexAnswer {
 			alexaRequest.shouldEndSession = false;
 		}
 
-		console.log(subIntent, resultVoice);
+		console.log('ComplexAnswer: '+ subIntent, resultVoice);
 
 		let extract  = new RegExp( /\[(.*?)\]/g ).exec( resultVoice );
 		let nuString = '';

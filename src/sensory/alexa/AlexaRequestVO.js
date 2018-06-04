@@ -46,10 +46,12 @@ class AlexaRequestVO {
 		this._vRes     = {};
 		this._vResLoop = [];
 
+		/*
 		console.log( '---------------------' );
 		console.log( JSON.stringify( objectPath.get( rawData, 'request' ), null, 4 ) );
 		console.log( JSON.stringify( this._reqSessionData, null, 4 ) );
 		console.log( '---------------------' );
+		*/
 	}
 
 	set vReq ( val ) {
