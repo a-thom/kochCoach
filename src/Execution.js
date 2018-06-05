@@ -96,6 +96,16 @@ class Execution {
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Weiter (alexaRequest) {
+
+		alexaRequest.currentStep += 1;
+
+		alexaRequest.vRes = {};
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
 
 }
 

@@ -52,6 +52,7 @@ class AlexaRequestVO {
 		this._vResLoop = [];
 
 		this._recipeIndex = 0;
+		this._currentStep = 0;
 
 		/*
 		console.log( '---------------------' );
@@ -105,6 +106,10 @@ class AlexaRequestVO {
 		this._recipeIndex = val;
 	}
 
+	set currentStep ( val ) {
+		this._currentStep = val;
+	}
+
 	get shouldEndSession () { return this._shouldEndSession }
 
 	get reqSessionData () { return this._reqSessionData }
@@ -142,6 +147,9 @@ class AlexaRequestVO {
 	get intentName () {return this._intentName;}
 
 	get recipeIndex () {return this._recipeIndex;}
+
+	get currentStep () {return this._currentStep;}
+
 
 }
 
