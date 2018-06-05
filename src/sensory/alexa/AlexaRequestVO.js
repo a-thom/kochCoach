@@ -51,7 +51,7 @@ class AlexaRequestVO {
 		this._vRes     = {};
 		this._vResLoop = [];
 
-		this._recipeIndex = null;
+		this._recipeIndex = 0;
 
 		/*
 		console.log( '---------------------' );

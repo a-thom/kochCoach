@@ -84,10 +84,14 @@ class Execution {
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
-	static Rezept (alexaRequest) {
-		let index = alexaRequest
-		let duration = alexaRequest.dataBase
-		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[Math.floor(Math.random() * alexaRequest.dataBase.length)].name};
+	static Kochen (alexaRequest) {
+
+		let index = alexaRequest.recipeIndex;
+		let recipeName = alexaRequest.dataBase[index].name;
+		let recipeDuration = alexaRequest.dataBase[index].time;
+
+
+		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
