@@ -53,10 +53,32 @@ class Execution {
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Start (alexaRequest) {
 
-		console.log('slot: ' + JSON.stringify(alexaRequest.slots));
-		console.log('slotResolution: ' + JSON.stringify(alexaRequest.slotResolution));
+		let slotObject = {};
+		slotObject = alexaRequest.slots;
+		let slots = {};
+		for ( let slot in slotObject ) {
+			slots[ slot ] = slotObject[ slot ];
+		}
+		let recipe = {};
+		for ( let slot in slots ) {
+			//TODO: Fehlermeldung, wenn kein Slot mitgegeben
+			recipe[ slot ] = slots[ slot ].resolutions.resolutionsPerAuthority[0].values[0].value.name;
+		}
 
-		alexaRequest.vRes = { name : 'dings'};
+		//console.log('recipe: ' + JSON.stringify(recipe.rezepte));
+
+		let names = [];
+		for(let i = 0; i < alexaRequest.dataBase.length; i++){
+			names [i] = alexaRequest.dataBase[i].name;
+		}
+
+		let index = names.indexOf(recipe.rezepte);
+		if(index >= 0){
+			alexaRequest.vRes = { reply : 'Okay. Ich starte das Rezept ' + alexaRequest.dataBase[index].name};
+		} else {
+			alexaRequest.vRes = { reply : 'dieses Rezept habe ich leider nicht gefunden.'};
+			//TODO warum kommt er hier garnicht hin sondern geht in anderen intent?
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}

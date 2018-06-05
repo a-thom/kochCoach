@@ -1,0 +1,77 @@
+{
+	"version": "1.0",
+	"session": {
+		"new": true,
+		"sessionId": "amzn1.echo-api.session.006db915-581d-475d-864d-98d2c7cadfa6",
+		"application": {
+			"applicationId": "amzn1.ask.skill.62e0d944-fdc9-4225-b434-3f2a68c41c67"
+		},
+		"user": {
+			"userId": "amzn1.ask.account.AEXWK2ACEX6JQQPW52YX32JI7XGLZBEAB2BZANQQG6OAEX7WELOC756LAQ3275QWNU3YFYOXEA34U574G6XFLNTYINMSVSVQP7E2P3DAUAONMX45BG2HVYO5OBY32M6HJVDE6U6HLQSL4TY4AICH76TJ7LONWSFBRWE6NNH5QIAFI27PB367UWAUWZYURPCU7L77WYUEMF72DGY"
+		}
+	},
+	"context": {
+		"AudioPlayer": {
+			"playerActivity": "IDLE"
+		},
+		"Display": {
+			"token": ""
+		},
+		"System": {
+			"application": {
+				"applicationId": "amzn1.ask.skill.62e0d944-fdc9-4225-b434-3f2a68c41c67"
+			},
+			"user": {
+				"userId": "amzn1.ask.account.AEXWK2ACEX6JQQPW52YX32JI7XGLZBEAB2BZANQQG6OAEX7WELOC756LAQ3275QWNU3YFYOXEA34U574G6XFLNTYINMSVSVQP7E2P3DAUAONMX45BG2HVYO5OBY32M6HJVDE6U6HLQSL4TY4AICH76TJ7LONWSFBRWE6NNH5QIAFI27PB367UWAUWZYURPCU7L77WYUEMF72DGY"
+			},
+			"device": {
+				"deviceId": "amzn1.ask.device.AFONUDV3P66OG7VAKQU5WNLTJBC7OUUL6G4L7YLJLDOQIOTM2PDPWGL2WUWEWYSHRT54ZJMLMPPOOFVXPIMB7LIPXHKUZOOGQBBCIP42V7SH2IBVDQVP6ILHHGG6YLYDOQCKOJNL2GJ3GKGC5XNMUEG7IDR522F524ZJEDEBGNJ44VO6JLDCA",
+				"supportedInterfaces": {
+					"AudioPlayer": {},
+					"Display": {
+						"templateVersion": "1.0",
+						"markupVersion": "1.0"
+					}
+				}
+			},
+			"apiEndpoint": "https://api.eu.amazonalexa.com",
+			"apiAccessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJhdWQiOiJodHRwczovL2FwaS5hbWF6b25hbGV4YS5jb20iLCJpc3MiOiJBbGV4YVNraWxsS2l0Iiwic3ViIjoiYW16bjEuYXNrLnNraWxsLjYyZTBkOTQ0LWZkYzktNDIyNS1iNDM0LTNmMmE2OGM0MWM2NyIsImV4cCI6MTUyODEzNjIxNywiaWF0IjoxNTI4MTMyNjE3LCJuYmYiOjE1MjgxMzI2MTcsInByaXZhdGVDbGFpbXMiOnsiY29uc2VudFRva2VuIjpudWxsLCJkZXZpY2VJZCI6ImFtem4xLmFzay5kZXZpY2UuQUZPTlVEVjNQNjZPRzdWQUtRVTVXTkxUSkJDN09VVUw2RzRMN1lMSkxET1FJT1RNMlBEUFdHTDJXVVdFV1lTSFJUNTRaSk1MTVBQT09GVlhQSU1CN0xJUFhIS1VaT09HUUJCQ0lQNDJWN1NIMklCVkRRVlA2SUxISEdHNllMWURPUUNLT0pOTDJHSjNHS0dDNVhOTVVFRzdJRFI1MjJGNTI0WkpFREVCR05KNDRWTzZKTERDQSIsInVzZXJJZCI6ImFtem4xLmFzay5hY2NvdW50LkFFWFdLMkFDRVg2SlFRUFc1MllYMzJKSTdYR0xaQkVBQjJCWkFOUVFHNk9BRVg3V0VMT0M3NTZMQVEzMjc1UVdOVTNZRllPWEVBMzRVNTc0RzZYRkxOVFlJTk1TVlNWUVA3RTJQM0RBVUFPTk1YNDVCRzJIVllPNU9CWTMyTTZISlZERTZVNkhMUVNMNFRZNEFJQ0g3NlRKN0xPTldTRkJSV0U2Tk5INVFJQUZJMjdQQjM2N1VXQVVXWllVUlBDVTdMNzdXWVVFTUY3MkRHWSJ9fQ.GezDXBFAIXk0MaJpXahxg-rO2ai9z-6Y9rV8mxDEbhB093CqgPJOPguwnqFDsGzInnU2nCFA9ejBTU8Y_Zh44EpjWYIa6CoZ9O28CVL4JjkFJoGNjDYu1OvuPwSGNpEEMHPXQMn2hZCOOJ6Ozh4QQC-UNS3IhnVCxzwYnlgyfYnKXl4FZlZH6w6_GEWj8SbmwO598znX9RcYRzF4EiQ_fYuwBJPKiU9b0tYgTfgjpFZN4IcERiuzXg9SU_on76Z5bqBvKTdyUHicEzdheiSWWb359XVAY4vmGlJ54Wh4p2-vvZaxR6Mb4h-doyY9MoECP5E-uoT7wXlYY_TZks5Wbw"
+		}
+	},
+	"request": {
+		"type": "IntentRequest",
+		"requestId": "amzn1.echo-api.request.b48695d9-6d68-41ce-bbd0-e04b56203438",
+		"timestamp": "2018-06-04T17:16:57Z",
+		"locale": "de-DE",
+		"intent": {
+			"name": "Start",
+			"confirmationStatus": "NONE",
+			"slots": {
+				"rezepte": {
+					"name": "rezepte",
+					"value": "flammkuchen",
+					"resolutions": {
+						"resolutionsPerAuthority": [
+							{
+								"authority": "amzn1.er-authority.echo-sdk.amzn1.ask.skill.62e0d944-fdc9-4225-b434-3f2a68c41c67.slotRezept",
+								"status": {
+									"code": "ER_SUCCESS_MATCH"
+								},
+								"values": [
+									{
+										"value": {
+											"name": "Flammkuchen Italiano mit Lauch",
+											"id": "1a265fd34dbe8216b519244db7799335"
+										}
+									}
+								]
+							}
+						]
+					},
+					"confirmationStatus": "NONE"
+				}
+			}
+		},
+		"dialogState": "STARTED"
+	}
+}

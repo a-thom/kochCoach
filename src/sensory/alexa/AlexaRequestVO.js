@@ -40,12 +40,12 @@ class AlexaRequestVO {
 		// parse Slots to object.
 		let slots   = objectPath.get( rawData, 'request.intent.slots' );
 		this._slots = {};
-		for ( let slot in slots ) { this._slots[ slot ] = slots[ slot ].value;}
+		for ( let slot in slots ) { this._slots[ slot ] = slots[ slot ];}
 
-		// get resolution for slot
-		let slotResolution;
-		this._slotResolution = {};
-		for ( let slot in slots ) { this._slotResolution[ slot ] = slots[ slot ].resolutions.resolutionsPerAuthority[0].values[0].value.name;}
+		// // get resolution for slot
+		// let slotResolution;
+		// this._slotResolution = {};
+		// for ( let slot in slots ) { this._slotResolution[ slot ] = slots[ slot ].resolutions.resolutionsPerAuthority[0].values[0].value.name;}
 
 		this._vReq     = {};
 		this._vRes     = {};
@@ -127,7 +127,7 @@ class AlexaRequestVO {
 
 	get slots () { return this._slots; }
 
-	get slotResolution () {return this._slotResolution}
+	// get slotResolution () {return this._slotResolution}
 
 	get answer () { return this._answer; }
 
