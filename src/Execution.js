@@ -74,15 +74,23 @@ class Execution {
 
 		let index = names.indexOf(recipe.rezepte);
 		if(index >= 0){
+			alexaRequest.recipeIndex = index;
 			alexaRequest.vRes = { reply : 'Okay. Ich starte das Rezept ' + alexaRequest.dataBase[index].name};
 		} else {
 			alexaRequest.vRes = { reply : 'dieses Rezept habe ich leider nicht gefunden.'};
-			//TODO warum kommt er hier garnicht hin sondern geht in anderen intent?
 		}
-
+		// TODO: rufe von hier aus Rezept skill auf
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Rezept (alexaRequest) {
+		let index = alexaRequest
+		let duration = alexaRequest.dataBase
+		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[Math.floor(Math.random() * alexaRequest.dataBase.length)].name};
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
 
 
 }

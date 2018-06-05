@@ -51,6 +51,8 @@ class AlexaRequestVO {
 		this._vRes     = {};
 		this._vResLoop = [];
 
+		this._recipeIndex = null;
+
 		/*
 		console.log( '---------------------' );
 		console.log( JSON.stringify( objectPath.get( rawData, 'request' ), null, 4 ) );
@@ -99,6 +101,10 @@ class AlexaRequestVO {
 		this._sessionData = val;
 	}
 
+	set recipeIndex ( val ) {
+		this._recipeIndex = val;
+	}
+
 	get shouldEndSession () { return this._shouldEndSession }
 
 	get reqSessionData () { return this._reqSessionData }
@@ -134,6 +140,8 @@ class AlexaRequestVO {
 	get requestType () { return this._requestType;}
 
 	get intentName () {return this._intentName;}
+
+	get recipeIndex () {return this._recipeIndex;}
 
 }
 
