@@ -24,33 +24,33 @@ class AlexaResponseVO {
             // }
           },
   
-          directives: [
-            {
-              type: 'Display.RenderTemplate',
-              template: {
-                type: 'BodyTemplate2',
-                token: 'jaujau',
-                title: 'Did You Know?',
-                backgroundImage: {
-                  contentDescription: 'Textured grey background',
-                  sources: [{url: 'https://s3.amazonaws.com/hurricane-data/hurricaneBackground.png'}],
-                },
-                textContent: {
-                  primaryText: {
-                    type: 'RichText',
-                    text: 'The worlds stinkiest cheese is from Northern France'
-                  }
-                }
-              }
-            },
-            {
-              type: 'Hint',
-              hint: {
-                type: 'PlainText',
-                text: 'string'
-              }
-            }
-          ]
+          // directives: [
+          //   {
+          //     type: 'Display.RenderTemplate',
+          //     template: {
+          //       type: 'BodyTemplate2',
+          //       token: 'jaujau',
+          //       title: 'Did You Know?',
+          //       backgroundImage: {
+          //         contentDescription: 'Textured grey background',
+          //         sources: [{url: 'https://s3.amazonaws.com/hurricane-data/hurricaneBackground.png'}],
+          //       },
+          //       textContent: {
+          //         primaryText: {
+          //           type: 'RichText',
+          //           text: 'The worlds stinkiest cheese is from Northern France'
+          //         }
+          //       }
+          //     }
+          //   },
+          //   {
+          //     type: 'Hint',
+          //     hint: {
+          //       type: 'PlainText',
+          //       text: 'string'
+          //     }
+          //   }
+          // ]
   
         },
         shouldEndSession: sessionEnd

@@ -35,8 +35,10 @@ class Execution {
 		/** check if a Method exists – named like the intent.. */
 		return ( typeof Execution[ intentMethod ] === 'function' ) ?
 		       Execution[ intentMethod ]( alexaRequest ) :
-		       Execution.GenericVuiRequest( alexaRequest );
-	}
+           Execution.GenericVuiRequest( alexaRequest );
+           //FRAGE: wie kommt man in die unteren (?) Funktionen rein
+  }
+  
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static GenericVuiRequest ( alexaRequest ) {
 		return new Promise( resolve => resolve( alexaRequest ) );
@@ -46,6 +48,18 @@ class Execution {
 	static Inspiration (alexaRequest) {
 
 		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[Math.floor(Math.random() * alexaRequest.dataBase.length)].name};
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+  }
+  
+  /**  @param {AlexaRequestVO} alexaRequestVO */
+	static Rezept (alexaRequest) {
+
+    let index = alexaRequest.recipeIndex;
+		let recipeName = alexaRequest.dataBase[index].name;
+    let recipeDuration = alexaRequest.dataBase[index].time;
+    
+		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
@@ -98,12 +112,15 @@ class Execution {
 	static Weiter (alexaRequest) {
 
 		alexaRequest.currentStep += 1;
-		alexaRequest.vRes = {};
+    alexaRequest.vRes = {};
+    
+    let column = `step${alexaRequest.currentStep}`;
+    let instruction = alexaRequest.dataBase[index].column;
+    
+    alexaRequest.vRes = { instruction: instruction};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
-
-
 }
 
 module.exports = Execution;
