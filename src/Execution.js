@@ -89,8 +89,6 @@ class Execution {
 		let index = alexaRequest.recipeIndex;
 		let recipeName = alexaRequest.dataBase[index].name;
 		let recipeDuration = alexaRequest.dataBase[index].time;
-
-
 		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
@@ -100,7 +98,6 @@ class Execution {
 	static Weiter (alexaRequest) {
 
 		alexaRequest.currentStep += 1;
-
 		alexaRequest.vRes = {};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
