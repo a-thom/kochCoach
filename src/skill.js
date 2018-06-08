@@ -8,7 +8,7 @@ const
   AlexaInitialisation = require( './sensory/alexa/AlexaInitialisation' ),
   Execution            = require( './Execution' ),
   ComplexAnswer        = require( './sensory/alexa/AlexaComplexAnswer' ),
-  AlexaRes             = require( './sensory/alexa/AlexaResponseVO' ),
+  AlexaRes             = require('./sensory/alexa/AlexaResponseVO'),
   AlexaReq             = require( './sensory/alexa/AlexaRequestVO' );
 
 let i = 0;
@@ -40,7 +40,6 @@ class Skill {
       .then( data => {
         //save initData to RAM
         //console.log(rezepte);
-
         initData               = data;
         alexaRequest.skillData = initData;
         return alexaRequest;

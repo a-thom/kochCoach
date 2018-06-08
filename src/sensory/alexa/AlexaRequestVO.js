@@ -5,7 +5,8 @@
 
 const
 		objectPath = require( 'object-path' ),
-		crypto     = require( 'crypto' );
+    crypto     = require( 'crypto' ),
+    userstore = require( './AlexaStore')
 
 class AlexaRequestVO {
 
@@ -60,7 +61,15 @@ class AlexaRequestVO {
 		console.log( JSON.stringify( this._reqSessionData, null, 4 ) );
 		console.log( '---------------------' );
 		*/
-	}
+  }
+  
+  savePermanent (key, val) {
+    userstore.save(this._userId, key, val)
+  }
+
+  getPermanent (key) {
+    return userstore.retrieve(this._userId, key)
+  }
 
 	set vReq ( val ) {
 		this._vReq = val;

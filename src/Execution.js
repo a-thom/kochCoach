@@ -3,7 +3,8 @@
  */
 
 const
-		AlexaComplexAnswer = require( './sensory/alexa/AlexaComplexAnswer' );
+    AlexaComplexAnswer = require( './sensory/alexa/AlexaComplexAnswer' ),
+    objectPath = require('object-path');
 
 class Execution {
 
@@ -36,7 +37,6 @@ class Execution {
 		return ( typeof Execution[ intentMethod ] === 'function' ) ?
 		       Execution[ intentMethod ]( alexaRequest ) :
            Execution.GenericVuiRequest( alexaRequest );
-           //FRAGE: wie kommt man in die unteren (?) Funktionen rein
   }
   
 	/**  @param {AlexaRequestVO} alexaRequestVO */
@@ -74,26 +74,27 @@ class Execution {
 			slots[ slot ] = slotObject[ slot ];
 		}
 		let recipe = {};
-		for ( let slot in slots ) {
-			//TODO: Fehlermeldung, wenn kein Slot mitgegeben
-			recipe[ slot ] = slots[ slot ].resolutions.resolutionsPerAuthority[0].values[0].value.name;
-		}
 
-		//console.log('recipe: ' + JSON.stringify(recipe.rezepte));
+      recipe = objectPath.get(slots, `rezepte.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
+      console.log('recipe: ' + recipe);
 
 		let names = [];
 		for(let i = 0; i < alexaRequest.dataBase.length; i++){
 			names [i] = alexaRequest.dataBase[i].name;
 		}
 
-		let index = names.indexOf(recipe.rezepte);
+		let index = names.indexOf(recipe);
 		if(index >= 0){
-			alexaRequest.recipeIndex = index;
+      alexaRequest.savePermanent('index', index);
+      alexaRequest.savePermanent('step', 0);
 			alexaRequest.vRes = { reply : 'Okay. Ich starte das Rezept ' + alexaRequest.dataBase[index].name};
 		} else {
-			alexaRequest.vRes = { reply : 'dieses Rezept habe ich leider nicht gefunden.'};
+      alexaRequest.intentName = 'NoRecipe' 
+			//alexaRequest.vRes = { reply : 'dieses Rezept habe ich leider nicht gefunden.'};
 		}
-		// TODO: rufe von hier aus Rezept skill auf
+    // TODO: rufe von hier aus Rezept intent auf
+    
+
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
@@ -110,12 +111,13 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Weiter (alexaRequest) {
+    let step = alexaRequest.getPermanent('step') + 1 ;
+    let index = alexaRequest.getPermanent('index');
+    alexaRequest.savePermanent('step', step);
 
-		alexaRequest.currentStep += 1;
-    alexaRequest.vRes = {};
-    
-    let column = `step${alexaRequest.currentStep}`;
-    let instruction = alexaRequest.dataBase[index].column;
+    let column = `step${step}`;
+    console.log(step,index,column);
+    let instruction = alexaRequest.dataBase[index][column];
     
     alexaRequest.vRes = { instruction: instruction};
 
