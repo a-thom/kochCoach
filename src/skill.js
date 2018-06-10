@@ -46,7 +46,6 @@ class Skill {
       } )
       .then( Execution.exec )
       .then( alexaRequest => {
-        //TODO: use SessionData to log stuff
         voiceResponse = AlexaRes.getResponse( alexaRequest.answer,
           alexaRequest.shouldEndSession,
           Object.assign( {}, alexaRequest.sessionData, {

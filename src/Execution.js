@@ -44,64 +44,63 @@ class Execution {
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
-	/**  @param {AlexaRequestVO} alexaRequestVO */
-	static Inspiration (alexaRequest) {
+	static LaunchRequest (alexaRequest) {
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
 
-		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[Math.floor(Math.random() * alexaRequest.dataBase.length)].name};
+	static Inspiration (alexaRequest) {
+		let randomSelection = Math.floor(Math.random() * alexaRequest.dataBase.length);
+		alexaRequest.savePermanent('index', randomSelection);
+		alexaRequest.savePermanent('step', 0);
+		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[randomSelection].name};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
   }
   
-  /**  @param {AlexaRequestVO} alexaRequestVO */
 	static Rezept (alexaRequest) {
-
-    let index = alexaRequest.recipeIndex;
+		console.log("index: " + index)
+		let index = alexaRequest.getPermanent('index');
 		let recipeName = alexaRequest.dataBase[index].name;
     let recipeDuration = alexaRequest.dataBase[index].time;
-    
+
 		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
-	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Start (alexaRequest) {
-
-		let slotObject = {};
-		slotObject = alexaRequest.slots;
+		//read slot resolution from JSON request
+		let slotObject = alexaRequest.slots;
 		let slots = {};
-		for ( let slot in slotObject ) {
-			slots[ slot ] = slotObject[ slot ];
-		}
-		let recipe = {};
+		for ( let slot in slotObject ) { slots[ slot ] = slotObject[ slot ];}
+		let recipe = objectPath.get(slots, `rezepte.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
+		console.log('recipe: ' + recipe);
 
-      recipe = objectPath.get(slots, `rezepte.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
-      console.log('recipe: ' + recipe);
-
+		//get names of all available recipes
 		let names = [];
 		for(let i = 0; i < alexaRequest.dataBase.length; i++){
 			names [i] = alexaRequest.dataBase[i].name;
 		}
 
+		//find slot value in names array
 		let index = names.indexOf(recipe);
 		if(index >= 0){
       alexaRequest.savePermanent('index', index);
       alexaRequest.savePermanent('step', 0);
-			alexaRequest.vRes = { reply : 'Okay. Ich starte das Rezept ' + alexaRequest.dataBase[index].name};
+			let recipeName = alexaRequest.dataBase[index].name;
+			let recipeDuration = alexaRequest.dataBase[index].time;
+			alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
+			alexaRequest.intentName = 'Rezept';
 		} else {
       alexaRequest.intentName = 'NoRecipe' 
-			//alexaRequest.vRes = { reply : 'dieses Rezept habe ich leider nicht gefunden.'};
 		}
-    // TODO: rufe von hier aus Rezept intent auf
-    
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
-	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Kochen (alexaRequest) {
-
-		let index = alexaRequest.recipeIndex;
+		let step = alexaRequest.getPermanent('step') ;
+		let index = alexaRequest.getPermanent('index');
 		let recipeName = alexaRequest.dataBase[index].name;
 		let recipeDuration = alexaRequest.dataBase[index].time;
 		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
@@ -109,17 +108,48 @@ class Execution {
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
-	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Weiter (alexaRequest) {
     let step = alexaRequest.getPermanent('step') + 1 ;
     let index = alexaRequest.getPermanent('index');
     alexaRequest.savePermanent('step', step);
 
     let column = `step${step}`;
-    console.log(step,index,column);
+    let columnDur = `dur${step}`
     let instruction = alexaRequest.dataBase[index][column];
-    
+    let stepDuration = alexaRequest.dataBase[index][columnDur];
+
+    if(stepDuration<3){
+    	//todo: is this supposed to make a difference?
+		} else {}
+
+    //TODO: will man hier mit einem nicht complexAnswer mode antworten?
     alexaRequest.vRes = { instruction: instruction};
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	static Zurueck (alexaRequest) {
+		let step = alexaRequest.getPermanent('step') - 1 ;
+		let index = alexaRequest.getPermanent('index');
+		alexaRequest.savePermanent('step', step);
+
+		let column = `step${step}`;
+		// let columnDur = `dur${step}`
+		let instruction = alexaRequest.dataBase[index][column];
+		// let stepDuration = alexaRequest.dataBase[index][columnDur];
+		alexaRequest.vRes = { instruction: instruction};
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	static Wiederholen (alexaRequest) {
+		let step = alexaRequest.getPermanent('step');
+		let index = alexaRequest.getPermanent('index');
+		let column = `step${step}`;
+		// let columnDur = `dur${step}`
+		let instruction = alexaRequest.dataBase[index][column];
+		// let stepDuration = alexaRequest.dataBase[index][columnDur];
+		alexaRequest.vRes = { instruction: instruction};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
