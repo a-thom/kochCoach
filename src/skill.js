@@ -32,7 +32,7 @@ class Skill {
     let alexaMainChain =
       //   initData ?
       //   Promise.resolve(initData) :
-      AlexaInitialisation.loadSpreadSheetVUI( config.spreadSheetVui );
+      AlexaInitialisation.loadSpreadSheetVUI( config.spreadSheetVui);
 
     let voiceResponse;
 

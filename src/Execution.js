@@ -137,6 +137,7 @@ class Execution {
 		// let columnDur = `dur${step}`
 		let instruction = alexaRequest.dataBase[index][column];
 		// let stepDuration = alexaRequest.dataBase[index][columnDur];
+		console.log(instruction);
 		alexaRequest.vRes = { instruction: instruction};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
