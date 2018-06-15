@@ -44,30 +44,28 @@ class Execution {
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static LaunchRequest (alexaRequest) {
+		let prevUsage;
+		console.log(alexaRequest.getPermanent('firstUse'));
+		if(alexaRequest.getPermanent('firstUse') == "undefined") {
+			alexaRequest.savePermanent('firstUse', 'false');
+			alexaRequest.intentName = 'LaunchRequestFirst';
+		};
+
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Inspiration (alexaRequest) {
 		let randomSelection = Math.floor(Math.random() * alexaRequest.dataBase.length);
 		alexaRequest.savePermanent('index', randomSelection);
 		alexaRequest.savePermanent('step', 0);
 		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[randomSelection].name};
-
 		return new Promise( resolve => resolve( alexaRequest ) );
   }
-  
-	static Rezept (alexaRequest) {
-		console.log("index: " + index)
-		let index = alexaRequest.getPermanent('index');
-		let recipeName = alexaRequest.dataBase[index].name;
-    let recipeDuration = alexaRequest.dataBase[index].time;
 
-		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
-
-		return new Promise( resolve => resolve( alexaRequest ) );
-	}
-
+	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Start (alexaRequest) {
 		//read slot resolution from JSON request
 		let slotObject = alexaRequest.slots;
@@ -81,23 +79,117 @@ class Execution {
 		for(let i = 0; i < alexaRequest.dataBase.length; i++){
 			names [i] = alexaRequest.dataBase[i].name;
 		}
-
 		//find slot value in names array
 		let index = names.indexOf(recipe);
 		if(index >= 0){
-      alexaRequest.savePermanent('index', index);
-      alexaRequest.savePermanent('step', 0);
+			alexaRequest.savePermanent('index', index);
+			alexaRequest.savePermanent('step', 0);
 			let recipeName = alexaRequest.dataBase[index].name;
 			let recipeDuration = alexaRequest.dataBase[index].time;
 			alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 			alexaRequest.intentName = 'Rezept';
 		} else {
-      alexaRequest.intentName = 'NoRecipe' 
+			alexaRequest.intentName = 'NoRecipe'
 		}
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+		/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Suche (alexaRequest){
+		//read slot resolution from JSON request
+		let slotObject = alexaRequest.slots;
+		let slots = {};
+		for ( let slot in slotObject ) { slots[ slot ] = slotObject[ slot ];}
+		let searchParameter = objectPath.get(slots, `parameter.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
+		console.log('searchFor: ' + searchParameter);
+
+		//get keyWords of all available recipes
+		let keyWordsFound = [];
+		for(let i = 0; i < alexaRequest.dataBase.length; i++){
+			let words = alexaRequest.dataBase[i].keyWords;
+			keyWordsFound [i] = words.split(', ');
+		}
+
+		//find slot value in keyWords array
+		let resultsArray = [];
+		for(var i = 0; i < keyWordsFound.length; i++) {
+			var keyWords = keyWordsFound[i];
+			for(var j = 0; j < keyWords.length; j++) {
+				if(keyWords[j] == searchParameter){
+					resultsArray.push(i);
+				}
+			}
+		}
+
+		if(resultsArray.length == 0) {
+			alexaRequest.intentName = 'NoResult';
+		} else {
+			let results = resultsArray.length;
+			let index = resultsArray.shift();
+			alexaRequest.savePermanent('results', resultsArray);
+			let name = alexaRequest.dataBase[index].name;
+			alexaRequest.savePermanent('index', index);
+			alexaRequest.savePermanent('step', 0);
+			if(resultsArray.length == 0) {
+				alexaRequest.vRes = { name : name};
+				alexaRequest.intentName = 'OneFound';
+			} else {
+				alexaRequest.vRes = { name : name, results: results};
+			}
+		}
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Vorschlaege (alexaRequest){
+		let list = alexaRequest.getPermanent('results');
+		let index = list.shift();
+		console.log(index);
+		alexaRequest.savePermanent('results', list);
+		alexaRequest.savePermanent('index', index);
+		alexaRequest.savePermanent('step', 0);
+		let recipeName = alexaRequest.dataBase[index].name;
+		console.log(recipeName);
+		console.log(list.length);
+		if(list.length == 0) {
+			console.log("in");
+			alexaRequest.vRes = { lastName : recipeName };
+			console.log(recipeName);
+			alexaRequest.intentName = 'LastResult';
+		}
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Rezept (alexaRequest) {
+		let index = alexaRequest.getPermanent('index');
+		let recipeName = alexaRequest.dataBase[index].name;
+		let recipeDuration = alexaRequest.dataBase[index].time;
+
+		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Zutatenliste (alexaRequest){
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Kurzanleitung (alexaRequest){
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Tipps (alexaRequest){
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Kochen (alexaRequest) {
 		let step = alexaRequest.getPermanent('step') ;
 		let index = alexaRequest.getPermanent('index');
@@ -108,6 +200,7 @@ class Execution {
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Weiter (alexaRequest) {
     let step = alexaRequest.getPermanent('step') + 1 ;
     let index = alexaRequest.getPermanent('index');
@@ -122,12 +215,26 @@ class Execution {
     	//todo: is this supposed to make a difference?
 		} else {}
 
-    //TODO: will man hier mit einem nicht complexAnswer mode antworten?
+    //TODO: reply with a response instead of a complex answer?
     alexaRequest.vRes = { instruction: instruction};
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Wiederholen (alexaRequest) {
+		let step = alexaRequest.getPermanent('step');
+		let index = alexaRequest.getPermanent('index');
+		let column = `step${step}`;
+		// let columnDur = `dur${step}`
+		let instruction = alexaRequest.dataBase[index][column];
+		// let stepDuration = alexaRequest.dataBase[index][columnDur];
+		alexaRequest.vRes = { instruction: instruction};
+
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Zurueck (alexaRequest) {
 		let step = alexaRequest.getPermanent('step') - 1 ;
 		let index = alexaRequest.getPermanent('index');
@@ -138,18 +245,6 @@ class Execution {
 		let instruction = alexaRequest.dataBase[index][column];
 		// let stepDuration = alexaRequest.dataBase[index][columnDur];
 		console.log(instruction);
-		alexaRequest.vRes = { instruction: instruction};
-
-		return new Promise( resolve => resolve( alexaRequest ) );
-	}
-
-	static Wiederholen (alexaRequest) {
-		let step = alexaRequest.getPermanent('step');
-		let index = alexaRequest.getPermanent('index');
-		let column = `step${step}`;
-		// let columnDur = `dur${step}`
-		let instruction = alexaRequest.dataBase[index][column];
-		// let stepDuration = alexaRequest.dataBase[index][columnDur];
 		alexaRequest.vRes = { instruction: instruction};
 
 		return new Promise( resolve => resolve( alexaRequest ) );

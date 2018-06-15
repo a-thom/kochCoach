@@ -12,9 +12,13 @@ class AlexaStore {
   }
 
   static retrieve (id, key) {
-    let val = store[id][key]
-    //console.log( 'get', id, key, val)
-    return val
+  	let val;
+		try { val = store[id][key]} catch (e) {
+			val = "undefined";
+		}
+
+		//console.log( 'get', id, key, val)
+    return val;
   }
 }
 
