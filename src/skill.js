@@ -61,7 +61,8 @@ class Skill {
         alexaRequest.intentName = 'Error';
         alexaRequest.vReq       = err;
         alexaRequest.answer     = ComplexAnswer.buildComplexAnwser( alexaRequest );
-        voiceResponse           = AlexaRes.getResponse( alexaRequest.answer, true, err );
+        console.log('cardTitle: '+ alexaRequest.cardTitle);
+        voiceResponse           = AlexaRes.getResponse( alexaRequest.answer, true, err, alexaRequest.cardTitle, alexaRequest.cardContent);
         callback( null, voiceResponse );
       } );
 

@@ -172,14 +172,39 @@ class Execution {
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
-	static Zutatenliste (alexaRequest){
+	static ZutatenListe (alexaRequest){
+		//console.log("ingr: " + ingredients);
+		let index = alexaRequest.getPermanent('index');
+		let ingredients = alexaRequest.dataBase[index].keyIngr;
+
+		alexaRequest.vRes = { ingredients : ingredients };
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
-	static Kurzanleitung (alexaRequest){
+	static ZutatenVorlesen (alexaRequest){
+		let index = alexaRequest.getPermanent('index');
+		let allIngredients = alexaRequest.dataBase[index].ingredients;
+		alexaRequest.vRes = { ingredients : allIngredients };
 
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Einkaufsliste (alexaRequest){
+		let index = alexaRequest.getPermanent('index');
+		let ingredients = alexaRequest.dataBase[index].ingredients;
+		alexaRequest.cardTitle = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
+		alexaRequest.cardContent = ingredients;
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
+
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static Kurzanleitung (alexaRequest){
+		let index = alexaRequest.getPermanent('index');
+		let sumup = alexaRequest.dataBase[index].sumup;
+		alexaRequest.vRes = { summary : sumup };
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 

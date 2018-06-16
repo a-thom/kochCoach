@@ -18,6 +18,10 @@ class AlexaRequestVO {
 
 		this._dataBase = null;
 
+		this._cardTitle = null;
+
+		this._cardContent = null;
+
 		this._shouldEndSession = true;
 
 		this._locale = objectPath.get( rawData, 'request.locale' );
@@ -95,6 +99,14 @@ class AlexaRequestVO {
 		this._answer = val;
 	}
 
+	set cardTitle (val) {
+		this._cardTitle = val;
+	}
+
+	set cardContent (val) {
+		this._cardContent = val;
+	}
+
 	set shouldEndSession ( val ) {
 		this._shouldEndSession = val;
 	}
@@ -137,7 +149,7 @@ class AlexaRequestVO {
 
 	get local () { return this._locale; }
 
-	get answer () { return this._answer; }
+	//get answer () { return this._answer; }
 
 	get deviceId () { return this._deviceID; }
 
@@ -150,6 +162,10 @@ class AlexaRequestVO {
 	// get slotResolution () {return this._slotResolution}
 
 	get answer () { return this._answer; }
+
+	get cardTitle() { return this._cardTitle; }
+
+	get cardContent() { return this._cardContent; }
 
 	get requestType () { return this._requestType;}
 
