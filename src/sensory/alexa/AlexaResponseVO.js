@@ -5,49 +5,36 @@
 class AlexaResponseVO {
   static getResponse (text, sessionEnd = true, sessionData = null, card = null) {
   	let title = card.title;
-  	console.log('card: ' + JSON.stringify(card));
-    console.log(card.content);
-    let res;
-    if(!title){
-			res =
-				{
-					version: '1.0',
-					sessionAttributes: {},
-					response: {
-						outputSpeech: {
-							type: 'SSML',
-							ssml: `<speak>${text}</speak>`
-						},
+  	console.log('title: ' + card.title)
+    let res =
+			{
+				version: '1.0',
+				sessionAttributes: {},
+				response: {
+					outputSpeech: {
+						type: 'SSML',
+						ssml: `<speak>${text}</speak>`
 					},
-					shouldEndSession: sessionEnd
+				},
+				shouldEndSession: sessionEnd
+			}
+    if(typeof title === 'string'){
+  		console.log('in');
+    	res.response.card = {
+				type: "Standard", // Simple, Standard, LinkAccount
+				title: card.title,
+				text: card.content,
+				"image": {
+				  "smallImageUrl": card.image,
+				  "largeImageUrl": card.image
 				}
-    } else {
-			res =
-				{
-					version: '1.0',
-					sessionAttributes: {},
-					response: {
-						outputSpeech: {
-							type: 'SSML',
-							ssml: `<speak>${text}</speak>`
-						},
-
-						card : {
-							type: "Standard", // Simple, Standard, LinkAccount
-							title: card.title,
-							text: card.content,
-							// "image": {
-							//   "smallImageUrl": "https://carfu.com/resources/card-images/race-car-small.png",
-							//   "largeImageUrl": "https://carfu.com/resources/card-images/race-car-large.png"
-							// }
-						},
-					},
-					shouldEndSession: sessionEnd
-				}
+			}
     }
 		// add Session Attributes
 		res.sessionAttributes = sessionData
-    return res;
+		console.log('res: ' + JSON.stringify(res));
+
+		return res;
   }
 }
 

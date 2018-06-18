@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c351cca-b5cf-4100-ab32-80fe7a2e88f6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Execution.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Execution.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaRequestVO.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaRequestVO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/skill.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/skill.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -107,8 +104,8 @@
       <file leaf-file-name="AlexaResponseVO.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+            <state relative-caret-position="360">
+              <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -308,12 +305,12 @@
       <workItem from="1528792297017" duration="2082000" />
       <workItem from="1529048959862" duration="194000" />
       <workItem from="1529049159556" duration="97000" />
-      <workItem from="1529049300043" duration="23885000" />
+      <workItem from="1529049300043" duration="25036000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32121000" />
+    <option name="totallyTimeSpent" value="33272000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -571,8 +568,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+        <state relative-caret-position="360">
+          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
         </state>
       </provider>
     </entry>
