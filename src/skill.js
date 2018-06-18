@@ -46,12 +46,13 @@ class Skill {
       } )
       .then( Execution.exec )
       .then( alexaRequest => {
+      	console.log('context: ' + context)
         voiceResponse = AlexaRes.getResponse( alexaRequest.answer,
           alexaRequest.shouldEndSession,
           Object.assign( {}, alexaRequest.sessionData, {
             request : ++i,
             context : context
-          } )
+          } ), alexaRequest.cardTitle, alexaRequest.cardContent
         );
         console.log( '📺 ->', voiceResponse );
         callback( null, voiceResponse );
@@ -62,7 +63,7 @@ class Skill {
         alexaRequest.vReq       = err;
         alexaRequest.answer     = ComplexAnswer.buildComplexAnwser( alexaRequest );
         console.log('cardTitle: '+ alexaRequest.cardTitle);
-        voiceResponse           = AlexaRes.getResponse( alexaRequest.answer, true, err, alexaRequest.cardTitle, alexaRequest.cardContent);
+        voiceResponse           = AlexaRes.getResponse( alexaRequest.answer, alexaRequest.shouldEndSession, err, alexaRequest.cardTitle, alexaRequest.cardContent);
         callback( null, voiceResponse );
       } );
 

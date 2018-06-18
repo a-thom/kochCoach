@@ -4,7 +4,8 @@
 
 class AlexaResponseVO {
   static getResponse (text, sessionEnd = true, sessionData = null, cardTitle = null, cardContent = null) {
-    console.log(cardContent);
+  	console.log('sessionData: ' + sessionData);
+    console.log('sessionEnd: ' + sessionEnd);
     let res;
     if(cardContent == null){
 			res =
