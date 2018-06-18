@@ -196,6 +196,7 @@ class Execution {
 		let index = alexaRequest.getPermanent('index');
 		let ingredients = alexaRequest.dataBase[index].ingredients;
 		alexaRequest.cardTitle = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
+		ingredients = ingredients.replace(/, /g, '\r');
 		alexaRequest.cardContent = ingredients;
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}

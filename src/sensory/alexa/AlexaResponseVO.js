@@ -32,9 +32,9 @@ class AlexaResponseVO {
 						},
 
 						card : {
-							type: "Simple", // Simple, Standard, LinkAccount
+							type: "Standard", // Simple, Standard, LinkAccount
 							title: cardTitle,
-							content: cardContent,
+							text: cardContent,
 							// "image": {
 							//   "smallImageUrl": "https://carfu.com/resources/card-images/race-car-small.png",
 							//   "largeImageUrl": "https://carfu.com/resources/card-images/race-car-large.png"
