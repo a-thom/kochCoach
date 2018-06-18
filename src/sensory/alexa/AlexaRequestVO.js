@@ -18,9 +18,7 @@ class AlexaRequestVO {
 
 		this._dataBase = null;
 
-		this._cardTitle = null;
-
-		this._cardContent = null;
+		this._card = {};
 
 		this._shouldEndSession = true;
 
@@ -99,12 +97,8 @@ class AlexaRequestVO {
 		this._answer = val;
 	}
 
-	set cardTitle (val) {
-		this._cardTitle = val;
-	}
-
-	set cardContent (val) {
-		this._cardContent = val;
+	set card (val) {
+		this._card = val;
 	}
 
 	set shouldEndSession ( val ) {
@@ -163,9 +157,7 @@ class AlexaRequestVO {
 
 	get answer () { return this._answer; }
 
-	get cardTitle() { return this._cardTitle; }
-
-	get cardContent() { return this._cardContent; }
+	get card() { return this._card; }
 
 	get requestType () { return this._requestType;}
 

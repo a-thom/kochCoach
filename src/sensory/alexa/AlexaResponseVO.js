@@ -3,11 +3,12 @@
  */
 
 class AlexaResponseVO {
-  static getResponse (text, sessionEnd = true, sessionData = null, cardTitle = null, cardContent = null) {
-  	console.log('sessionData: ' + sessionData);
-    console.log('sessionEnd: ' + sessionEnd);
+  static getResponse (text, sessionEnd = true, sessionData = null, card = null) {
+  	let title = card.title;
+  	console.log('card: ' + JSON.stringify(card));
+    console.log(card.content);
     let res;
-    if(cardContent == null){
+    if(!title){
 			res =
 				{
 					version: '1.0',
@@ -33,8 +34,8 @@ class AlexaResponseVO {
 
 						card : {
 							type: "Standard", // Simple, Standard, LinkAccount
-							title: cardTitle,
-							text: cardContent,
+							title: card.title,
+							text: card.content,
 							// "image": {
 							//   "smallImageUrl": "https://carfu.com/resources/card-images/race-car-small.png",
 							//   "largeImageUrl": "https://carfu.com/resources/card-images/race-car-large.png"

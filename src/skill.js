@@ -52,7 +52,7 @@ class Skill {
           Object.assign( {}, alexaRequest.sessionData, {
             request : ++i,
             context : context
-          } ), alexaRequest.cardTitle, alexaRequest.cardContent
+          } ), alexaRequest.card
         );
         console.log( '📺 ->', voiceResponse );
         callback( null, voiceResponse );
@@ -63,7 +63,7 @@ class Skill {
         alexaRequest.vReq       = err;
         alexaRequest.answer     = ComplexAnswer.buildComplexAnwser( alexaRequest );
         console.log('cardTitle: '+ alexaRequest.cardTitle);
-        voiceResponse           = AlexaRes.getResponse( alexaRequest.answer, alexaRequest.shouldEndSession, err, alexaRequest.cardTitle, alexaRequest.cardContent);
+        voiceResponse           = AlexaRes.getResponse( alexaRequest.answer, alexaRequest.shouldEndSession, err, alexaRequest.card);
         callback( null, voiceResponse );
       } );
 

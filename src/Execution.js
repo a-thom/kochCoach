@@ -195,9 +195,10 @@ class Execution {
 	static Einkaufsliste (alexaRequest){
 		let index = alexaRequest.getPermanent('index');
 		let ingredients = alexaRequest.dataBase[index].ingredients;
-		alexaRequest.cardTitle = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
+		alexaRequest.card.title = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
 		ingredients = ingredients.replace(/, /g, '\r');
-		alexaRequest.cardContent = ingredients;
+		alexaRequest.card.content = ingredients;
+		alexaRequest.card.image = alexaRequest.dataBase[index].image;
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
