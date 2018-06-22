@@ -58,7 +58,31 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Inspiration (alexaRequest) {
-		let randomSelection = Math.floor(Math.random() * alexaRequest.dataBase.length);
+		let choice = [];
+		let ignoreList = alexaRequest.getPermanent('ignoreList');
+		if(typeof ignoreList == 'Object') {
+			//todo: wie muss ich das schreiben?
+			console.log('object');
+		} else {
+			ignoreList = [];
+			ignoreList.push(3);
+		}
+		console.log(ignoreList);
+		for(var i = 0; i<alexaRequest.dataBase.length; i++){
+			let found = ignoreList.indexOf(i);
+				if(found == -1){
+					choice.push(i);
+				}
+		}
+		if(choice.length == 0){
+			ignoreList = [];
+			for(var i = 0; i<alexaRequest.dataBase.length; i++){
+				choice.push(i);
+			}
+		}
+		let randomSelection = choice[Math.floor(Math.random() * choice.length)];
+		ignoreList.push(randomSelection);
+		alexaRequest.savePermanent('ignoreListe', ignoreList);
 		alexaRequest.savePermanent('index', randomSelection);
 		alexaRequest.savePermanent('step', 0);
 		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[randomSelection].name};
