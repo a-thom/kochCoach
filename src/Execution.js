@@ -296,7 +296,19 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Tipps (alexaRequest){
-
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let step = alexaRequest.getPermanent('step') ;
+			let index = alexaRequest.getPermanent('index');
+			let column = `tipp${step}`;
+			let tipp = alexaRequest.dataBase[index][column];
+			if(tipp == ""){
+				alexaRequest.intentName = "NoTipp";
+			} else {
+				alexaRequest.vRes = { tipp: tipp};
+			}
+		}
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
@@ -305,7 +317,6 @@ class Execution {
 		if(alexaRequest.getPermanent('index') == "undefined") {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
-			let step = alexaRequest.getPermanent('step') ;
 			let index = alexaRequest.getPermanent('index');
 			let recipeName = alexaRequest.dataBase[index].name;
 			let recipeDuration = alexaRequest.dataBase[index].time;
@@ -317,7 +328,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Weiter (alexaRequest) {
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if (alexaRequest.getPermanent('index') == "undefined") {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let step = alexaRequest.getPermanent('step') + 1 ;
@@ -329,14 +340,19 @@ class Execution {
 			let instruction = alexaRequest.dataBase[index][column];
 			let stepDuration = alexaRequest.dataBase[index][columnDur];
 
-			if(stepDuration<3){
-				//todo: is this supposed to make a difference?
-			} else {}
+			console.log('instruction: ' + instruction);
+			if (typeof instruction === 'string') {
+				if (stepDuration < 3) {
+					//todo: is this supposed to make a difference?
+				} else {
 
-			//TODO: reply with a response instead of a complex answer?
-			alexaRequest.vRes = { instruction: instruction};
+				}
+				//TODO: reply with a response instead of a complex answer?
+				alexaRequest.vRes = {instruction: instruction};
+			} else {
+				alexaRequest.intentName = 'NoMoreSteps';
+			}
 		}
-
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
