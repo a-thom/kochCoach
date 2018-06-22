@@ -52,22 +52,28 @@ class Execution {
 			alexaRequest.savePermanent('firstUse', 'false');
 			alexaRequest.intentName = 'LaunchRequestFirst';
 		};
+		return new Promise( resolve => resolve( alexaRequest ) );
+	}
 
+	/**  @param {AlexaRequestVO} alexaRequestVO */
+	static HelpIntent ( alexaRequest ) {
+		let step = alexaRequest.getPermanent('step');
+		if(step>0){
+			alexaRequest.intentName = 'HelpCooking';
+		}
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Inspiration (alexaRequest) {
 		let choice = [];
-		let ignoreList = alexaRequest.getPermanent('ignoreList');
-		if(typeof ignoreList == 'Object') {
-			//todo: wie muss ich das schreiben?
-			console.log('object');
-		} else {
-			ignoreList = [];
+		let ignoreList = [];
+		if(alexaRequest.getPermanent('ignoreList') == "undefined") {
 			ignoreList.push(3);
+		} else {
+			ignoreList = alexaRequest.getPermanent('ignoreList');
 		}
-		console.log(ignoreList);
+		console.log('ignoreList '+ignoreList);
 		for(var i = 0; i<alexaRequest.dataBase.length; i++){
 			let found = ignoreList.indexOf(i);
 				if(found == -1){
@@ -82,7 +88,7 @@ class Execution {
 		}
 		let randomSelection = choice[Math.floor(Math.random() * choice.length)];
 		ignoreList.push(randomSelection);
-		alexaRequest.savePermanent('ignoreListe', ignoreList);
+		alexaRequest.savePermanent('ignoreList', ignoreList);
 		alexaRequest.savePermanent('index', randomSelection);
 		alexaRequest.savePermanent('step', 0);
 		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[randomSelection].name};
