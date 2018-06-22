@@ -46,7 +46,7 @@ class Skill {
       } )
       .then( Execution.exec )
       .then( alexaRequest => {
-      	console.log('context: ' + context)
+      	//console.log('context: ' + context)
         voiceResponse = AlexaRes.getResponse( alexaRequest.answer,
           alexaRequest.shouldEndSession,
           Object.assign( {}, alexaRequest.sessionData, {
@@ -54,7 +54,7 @@ class Skill {
             context : context
           } ), alexaRequest.card
         );
-        console.log( '📺 ->', voiceResponse );
+        //console.log( '📺 ->', voiceResponse );
         callback( null, voiceResponse );
       } )
       .catch( ( err ) => {

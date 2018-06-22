@@ -19,7 +19,7 @@ class AlexaResponseVO {
 				shouldEndSession: sessionEnd
 			}
     if(typeof title === 'string'){
-  		console.log('in');
+  		//console.log('in');
     	res.response.card = {
 				type: "Standard", // Simple, Standard, LinkAccount
 				title: card.title,

@@ -71,16 +71,16 @@ class Execution {
 		let slotObject = alexaRequest.slots;
 		let slots = {};
 		for ( let slot in slotObject ) { slots[ slot ] = slotObject[ slot ];}
-		let recipe = objectPath.get(slots, `rezepte.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
-		console.log('recipe: ' + recipe);
-
+		let searchTerm = objectPath.get(slots, `rezepte.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
+		//todo: get whatever was said. possible?
+		console.log("searchTerm: " + searchTerm);
 		//get names of all available recipes
 		let names = [];
 		for(let i = 0; i < alexaRequest.dataBase.length; i++){
 			names [i] = alexaRequest.dataBase[i].name;
 		}
 		//find slot value in names array
-		let index = names.indexOf(recipe);
+		let index = names.indexOf(searchTerm);
 		if(index >= 0){
 			alexaRequest.savePermanent('index', index);
 			alexaRequest.savePermanent('step', 0);
@@ -89,6 +89,36 @@ class Execution {
 			alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
 			alexaRequest.intentName = 'Rezept';
 		} else {
+			//get keyWords of all available recipes
+			let keyWordsFound = [];
+			for(let i = 0; i < alexaRequest.dataBase.length; i++){
+				let words = alexaRequest.dataBase[i].keyWords;
+				keyWordsFound [i] = words.split(', ');
+			}
+			console.log(keyWordsFound.length);
+			//find slot value in keyWords array
+			let resultsArray = [];
+			for(var i = 0; i < keyWordsFound.length; i++) {
+				var keyWords = keyWordsFound[i];
+				console.log("searchTerm: " + searchTerm + keyWords);
+				for(var j = 0; j < keyWords.length; j++) {
+					if(keyWords[j] == searchTerm){
+
+						resultsArray.push(i);
+					}
+				}
+			}
+			if(resultsArray.length == 0) {
+				alexaRequest.intentName = 'NoRecipe';
+			} else {
+				let randomSelection = Math.floor(Math.random() * resultsArray.length);
+				let index = resultsArray[randomSelection];
+				let name = alexaRequest.dataBase[index].name;
+				alexaRequest.savePermanent('index', index);
+				alexaRequest.savePermanent('step', 0);
+				alexaRequest.vRes = { search : searchTerm, name: name};
+				alexaRequest.intentName = 'SthElse';
+			}
 			alexaRequest.intentName = 'NoRecipe'
 		}
 		return new Promise( resolve => resolve( alexaRequest ) );
