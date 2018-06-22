@@ -202,71 +202,95 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Vorschlaege (alexaRequest){
-		let list = alexaRequest.getPermanent('results');
-		let index = list.shift();
-		console.log(index);
-		alexaRequest.savePermanent('results', list);
-		alexaRequest.savePermanent('index', index);
-		alexaRequest.savePermanent('step', 0);
-		let recipeName = alexaRequest.dataBase[index].name;
-		console.log(recipeName);
-		console.log(list.length);
-		if(list.length == 0) {
-			console.log("in");
-			alexaRequest.vRes = { lastName : recipeName };
+		if(alexaRequest.getPermanent('results') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let list = alexaRequest.getPermanent('results');
+			let index = list.shift();
+			console.log(index);
+			alexaRequest.savePermanent('results', list);
+			alexaRequest.savePermanent('index', index);
+			alexaRequest.savePermanent('step', 0);
+			let recipeName = alexaRequest.dataBase[index].name;
 			console.log(recipeName);
-			alexaRequest.intentName = 'LastResult';
+			console.log(list.length);
+			if(list.length == 0) {
+				console.log("in");
+				alexaRequest.vRes = {lastName: recipeName};
+				console.log(recipeName);
+				alexaRequest.intentName = 'LastResult';
+			}
 		}
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Rezept (alexaRequest) {
-		let index = alexaRequest.getPermanent('index');
-		let recipeName = alexaRequest.dataBase[index].name;
-		let recipeDuration = alexaRequest.dataBase[index].time;
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let index = alexaRequest.getPermanent('index');
+			let recipeName = alexaRequest.dataBase[index].name;
+			let recipeDuration = alexaRequest.dataBase[index].time;
 
-		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
-
+			alexaRequest.vRes = {name: recipeName, duration: recipeDuration};
+		}
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static ZutatenListe (alexaRequest){
 		//console.log("ingr: " + ingredients);
-		let index = alexaRequest.getPermanent('index');
-		let ingredients = alexaRequest.dataBase[index].keyIngr;
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let index = alexaRequest.getPermanent('index');
+			let ingredients = alexaRequest.dataBase[index].keyIngr;
 
-		alexaRequest.vRes = { ingredients : ingredients };
+			alexaRequest.vRes = { ingredients : ingredients };
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static ZutatenVorlesen (alexaRequest){
-		let index = alexaRequest.getPermanent('index');
-		let allIngredients = alexaRequest.dataBase[index].ingredients;
-		alexaRequest.vRes = { ingredients : allIngredients };
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let index = alexaRequest.getPermanent('index');
+			let allIngredients = alexaRequest.dataBase[index].ingredients;
+			alexaRequest.vRes = { ingredients : allIngredients };
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Einkaufsliste (alexaRequest){
-		let index = alexaRequest.getPermanent('index');
-		let ingredients = alexaRequest.dataBase[index].ingredients;
-		alexaRequest.card.title = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
-		ingredients = ingredients.replace(/, /g, '\r');
-		alexaRequest.card.content = ingredients;
-		alexaRequest.card.image = alexaRequest.dataBase[index].image;
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let index = alexaRequest.getPermanent('index');
+			let ingredients = alexaRequest.dataBase[index].ingredients;
+			alexaRequest.card.title = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
+			ingredients = ingredients.replace(/, /g, '\r');
+			alexaRequest.card.content = ingredients;
+			alexaRequest.card.image = alexaRequest.dataBase[index].image;
+		}
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Kurzanleitung (alexaRequest){
-		let index = alexaRequest.getPermanent('index');
-		let sumup = alexaRequest.dataBase[index].sumup;
-		alexaRequest.vRes = { summary : sumup };
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let index = alexaRequest.getPermanent('index');
+			let sumup = alexaRequest.dataBase[index].sumup;
+			alexaRequest.vRes = { summary : sumup };
+		}
+
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
@@ -278,61 +302,77 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Kochen (alexaRequest) {
-		let step = alexaRequest.getPermanent('step') ;
-		let index = alexaRequest.getPermanent('index');
-		let recipeName = alexaRequest.dataBase[index].name;
-		let recipeDuration = alexaRequest.dataBase[index].time;
-		alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let step = alexaRequest.getPermanent('step') ;
+			let index = alexaRequest.getPermanent('index');
+			let recipeName = alexaRequest.dataBase[index].name;
+			let recipeDuration = alexaRequest.dataBase[index].time;
+			alexaRequest.vRes = { name : recipeName, duration: recipeDuration};
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Weiter (alexaRequest) {
-    let step = alexaRequest.getPermanent('step') + 1 ;
-    let index = alexaRequest.getPermanent('index');
-    alexaRequest.savePermanent('step', step);
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let step = alexaRequest.getPermanent('step') + 1 ;
+			let index = alexaRequest.getPermanent('index');
+			alexaRequest.savePermanent('step', step);
 
-    let column = `step${step}`;
-    let columnDur = `dur${step}`
-    let instruction = alexaRequest.dataBase[index][column];
-    let stepDuration = alexaRequest.dataBase[index][columnDur];
+			let column = `step${step}`;
+			let columnDur = `dur${step}`
+			let instruction = alexaRequest.dataBase[index][column];
+			let stepDuration = alexaRequest.dataBase[index][columnDur];
 
-    if(stepDuration<3){
-    	//todo: is this supposed to make a difference?
-		} else {}
+			if(stepDuration<3){
+				//todo: is this supposed to make a difference?
+			} else {}
 
-    //TODO: reply with a response instead of a complex answer?
-    alexaRequest.vRes = { instruction: instruction};
+			//TODO: reply with a response instead of a complex answer?
+			alexaRequest.vRes = { instruction: instruction};
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Wiederholen (alexaRequest) {
-		let step = alexaRequest.getPermanent('step');
-		let index = alexaRequest.getPermanent('index');
-		let column = `step${step}`;
-		// let columnDur = `dur${step}`
-		let instruction = alexaRequest.dataBase[index][column];
-		// let stepDuration = alexaRequest.dataBase[index][columnDur];
-		alexaRequest.vRes = { instruction: instruction};
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let step = alexaRequest.getPermanent('step');
+			let index = alexaRequest.getPermanent('index');
+			let column = `step${step}`;
+			// let columnDur = `dur${step}`
+			let instruction = alexaRequest.dataBase[index][column];
+			// let stepDuration = alexaRequest.dataBase[index][columnDur];
+			alexaRequest.vRes = { instruction: instruction};
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Zurueck (alexaRequest) {
-		let step = alexaRequest.getPermanent('step') - 1 ;
-		let index = alexaRequest.getPermanent('index');
-		alexaRequest.savePermanent('step', step);
+		if(alexaRequest.getPermanent('index') == "undefined") {
+			alexaRequest.intentName = 'NoRecipeSelected';
+		} else {
+			let step = alexaRequest.getPermanent('step') - 1 ;
+			let index = alexaRequest.getPermanent('index');
+			alexaRequest.savePermanent('step', step);
 
-		let column = `step${step}`;
-		// let columnDur = `dur${step}`
-		let instruction = alexaRequest.dataBase[index][column];
-		// let stepDuration = alexaRequest.dataBase[index][columnDur];
-		console.log(instruction);
-		alexaRequest.vRes = { instruction: instruction};
+			let column = `step${step}`;
+			// let columnDur = `dur${step}`
+			let instruction = alexaRequest.dataBase[index][column];
+			// let stepDuration = alexaRequest.dataBase[index][columnDur];
+			console.log(instruction);
+			alexaRequest.vRes = { instruction: instruction};
+		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
