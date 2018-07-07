@@ -47,18 +47,17 @@ class Execution {
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static LaunchRequest (alexaRequest) {
 		let prevUsage;
-		console.log(alexaRequest.getPermanent('firstUse'));
-		if(alexaRequest.getPermanent('firstUse') == "undefined") {
-			alexaRequest.savePermanent('firstUse', 'false');
+		if(alexaRequest.getPermanent('firstUse') === undefined) {
+			alexaRequest.savePermanent('firstUse', false);
 			alexaRequest.intentName = 'LaunchRequestFirst';
 		};
+		alexaRequest.savePermanent('phase', 'startup')
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static HelpIntent ( alexaRequest ) {
-		let step = alexaRequest.getPermanent('step');
-		if(step>0){
+		if(alexaRequest.getPermanent('phase') === 'Kochen'){
 			alexaRequest.intentName = 'HelpCooking';
 		}
 		return new Promise( resolve => resolve( alexaRequest ) );
@@ -68,7 +67,7 @@ class Execution {
 	static Inspiration (alexaRequest) {
 		let choice = [];
 		let ignoreList = [];
-		if(alexaRequest.getPermanent('ignoreList') == "undefined") {
+		if(alexaRequest.getPermanent('ignoreList') === undefined) {
 			ignoreList.push(3);
 		} else {
 			ignoreList = alexaRequest.getPermanent('ignoreList');
@@ -91,12 +90,14 @@ class Execution {
 		alexaRequest.savePermanent('ignoreList', ignoreList);
 		alexaRequest.savePermanent('index', randomSelection);
 		alexaRequest.savePermanent('step', 0);
+		alexaRequest.savePermanent('phase', 'searching');
 		alexaRequest.vRes = { suggestion : alexaRequest.dataBase[randomSelection].name};
 		return new Promise( resolve => resolve( alexaRequest ) );
   }
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Start (alexaRequest) {
+		alexaRequest.savePermanent('phase', 'searching');
 		//read slot resolution from JSON request
 		let slotObject = alexaRequest.slots;
 		let slots = {};
@@ -156,6 +157,7 @@ class Execution {
 
 		/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Suche (alexaRequest){
+		alexaRequest.savePermanent('phase', 'searching');
 		//read slot resolution from JSON request
 		let slotObject = alexaRequest.slots;
 		let slots = {};
@@ -194,6 +196,7 @@ class Execution {
 				alexaRequest.vRes = { name : name};
 				alexaRequest.intentName = 'OneFound';
 			} else {
+				alexaRequest.savePermanent('phase', 'results');
 				alexaRequest.vRes = { name : name, results: results};
 			}
 		}
@@ -202,31 +205,47 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Vorschlaege (alexaRequest){
-		if(alexaRequest.getPermanent('results') == "undefined") {
-			alexaRequest.intentName = 'NoRecipeSelected';
-		} else {
-			let list = alexaRequest.getPermanent('results');
-			let index = list.shift();
-			console.log(index);
-			alexaRequest.savePermanent('results', list);
-			alexaRequest.savePermanent('index', index);
-			alexaRequest.savePermanent('step', 0);
-			let recipeName = alexaRequest.dataBase[index].name;
-			console.log(recipeName);
-			console.log(list.length);
-			if(list.length == 0) {
-				console.log("in");
-				alexaRequest.vRes = {lastName: recipeName};
-				console.log(recipeName);
-				alexaRequest.intentName = 'LastResult';
-			}
+		switch (alexaRequest.getPermanent('phase')){
+			case('results'):
+				if(alexaRequest.getPermanent('results') === undefined) {
+					alexaRequest.intentName = 'NoSuggestions';
+				} else {
+					let list = alexaRequest.getPermanent('results');
+					let index = list.shift();
+					console.log(index);
+					alexaRequest.savePermanent('results', list);
+					alexaRequest.savePermanent('index', index);
+					alexaRequest.savePermanent('step', 0);
+					let recipeName = alexaRequest.dataBase[index].name;
+					console.log(recipeName);
+					console.log(list.length);
+					if(list.length == 0) {
+						console.log("in");
+						alexaRequest.vRes = {lastName: recipeName};
+						console.log(recipeName);
+						alexaRequest.intentName = 'LastResult';
+					}
+				}
+				break;
+			case('searching'):
+				alexaRequest.intentName = 'CatchStraysSearching';
+				break;
+			case('cooking'):
+				alexaRequest.intentName = 'CatchStraysCooking';
+				break;
+			case('recipe'):
+				alexaRequest.intentName = 'CatchStraysRecipe';
+				break;
+			default:
+				break;
 		}
+
 		return new Promise( resolve => resolve( alexaRequest ) );
 	}
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Rezept (alexaRequest) {
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let index = alexaRequest.getPermanent('index');
@@ -241,7 +260,7 @@ class Execution {
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static ZutatenListe (alexaRequest){
 		//console.log("ingr: " + ingredients);
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let index = alexaRequest.getPermanent('index');
@@ -255,7 +274,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static ZutatenVorlesen (alexaRequest){
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let index = alexaRequest.getPermanent('index');
@@ -268,13 +287,13 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Einkaufsliste (alexaRequest){
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let index = alexaRequest.getPermanent('index');
 			let ingredients = alexaRequest.dataBase[index].ingredients;
 			alexaRequest.card.title = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
-			ingredients = ingredients.replace(/, /g, '\r');
+			ingredients = ingredients.replace(/, /g, '\n');
 			alexaRequest.card.content = ingredients;
 			alexaRequest.card.image = alexaRequest.dataBase[index].image;
 		}
@@ -283,7 +302,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Kurzanleitung (alexaRequest){
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let index = alexaRequest.getPermanent('index');
@@ -296,7 +315,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Tipps (alexaRequest){
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let step = alexaRequest.getPermanent('step') ;
@@ -314,7 +333,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Kochen (alexaRequest) {
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let index = alexaRequest.getPermanent('index');
@@ -328,7 +347,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Weiter (alexaRequest) {
-		if (alexaRequest.getPermanent('index') == "undefined") {
+		if (alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let step = alexaRequest.getPermanent('step') + 1 ;
@@ -343,7 +362,7 @@ class Execution {
 			console.log('instruction: ' + instruction);
 			if (typeof instruction === 'string') {
 				if (stepDuration < 3) {
-					//todo: is this supposed to make a difference?
+					// todo: is this supposed to make a difference?
 				} else {
 
 				}
@@ -358,7 +377,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Wiederholen (alexaRequest) {
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let step = alexaRequest.getPermanent('step');
@@ -375,7 +394,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Zurueck (alexaRequest) {
-		if(alexaRequest.getPermanent('index') == "undefined") {
+		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
 			let step = alexaRequest.getPermanent('step') - 1 ;

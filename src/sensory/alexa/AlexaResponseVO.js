@@ -15,11 +15,11 @@ class AlexaResponseVO {
 						type: 'SSML',
 						ssml: `<speak>${text}</speak>`
 					},
+					shouldEndSession: sessionEnd
 				},
-				shouldEndSession: sessionEnd
 			}
-    if(typeof title === 'string'){
-  		//console.log('in');
+
+    if(title !== undefined){
     	res.response.card = {
 				type: "Standard", // Simple, Standard, LinkAccount
 				title: card.title,

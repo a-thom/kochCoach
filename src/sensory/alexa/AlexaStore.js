@@ -15,7 +15,7 @@ class AlexaStore {
   	let val;
 		try { val = store[id][key]}
 		catch (e) {
-			val = "undefined";
+			val = undefined;
 		}
 
 		//console.log( 'get', id, key, val)
