@@ -66,13 +66,13 @@ class Execution {
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Inspiration (alexaRequest) {
 		let choice = [];
-		let ignoreList = [];
+		let ignoreList = []; //holds those elements that have already been suggested
 		if(alexaRequest.getPermanent('ignoreList') === undefined) {
 			ignoreList.push(3);
 		} else {
 			ignoreList = alexaRequest.getPermanent('ignoreList');
 		}
-		console.log('ignoreList '+ignoreList);
+		//console.log('ignoreList '+ignoreList);
 		for(var i = 0; i<alexaRequest.dataBase.length; i++){
 			let found = ignoreList.indexOf(i);
 				if(found == -1){
@@ -103,7 +103,6 @@ class Execution {
 		let slots = {};
 		for ( let slot in slotObject ) { slots[ slot ] = slotObject[ slot ];}
 		let searchTerm = objectPath.get(slots, `rezepte.resolutions.resolutionsPerAuthority.0.values.0.value.name`);
-		//todo: get whatever was said. possible?
 		console.log("searchTerm: " + searchTerm);
 		//get names of all available recipes
 		let names = [];
@@ -248,6 +247,7 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
+			alexaRequest.savePermanent('phase', 'recipe');
 			let index = alexaRequest.getPermanent('index');
 			let recipeName = alexaRequest.dataBase[index].name;
 			let recipeDuration = alexaRequest.dataBase[index].time;
@@ -263,6 +263,7 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
+			alexaRequest.savePermanent('phase', 'recipe');
 			let index = alexaRequest.getPermanent('index');
 			let ingredients = alexaRequest.dataBase[index].keyIngr;
 
@@ -277,6 +278,7 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
+			alexaRequest.savePermanent('phase', 'recipe');
 			let index = alexaRequest.getPermanent('index');
 			let allIngredients = alexaRequest.dataBase[index].ingredients;
 			alexaRequest.vRes = { ingredients : allIngredients };
@@ -290,6 +292,7 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
+			alexaRequest.savePermanent('phase', 'recipe');
 			let index = alexaRequest.getPermanent('index');
 			let ingredients = alexaRequest.dataBase[index].ingredients;
 			alexaRequest.card.title = `Einkaufsliste für ${alexaRequest.dataBase[index].name}`;
@@ -305,6 +308,7 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
+			alexaRequest.savePermanent('phase', 'recipe');
 			let index = alexaRequest.getPermanent('index');
 			let sumup = alexaRequest.dataBase[index].sumup;
 			alexaRequest.vRes = { summary : sumup };
@@ -336,6 +340,7 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
+			alexaRequest.savePermanent('phase', 'cooking');
 			let index = alexaRequest.getPermanent('index');
 			let recipeName = alexaRequest.dataBase[index].name;
 			let recipeDuration = alexaRequest.dataBase[index].time;
@@ -361,12 +366,9 @@ class Execution {
 
 			console.log('instruction: ' + instruction);
 			if (typeof instruction === 'string') {
-				if (stepDuration < 3) {
-					// todo: is this supposed to make a difference?
-				} else {
-
-				}
-				//TODO: reply with a response instead of a complex answer?
+				// if (stepDuration < 3) {
+				// } else {
+				// }
 				alexaRequest.vRes = {instruction: instruction};
 			} else {
 				alexaRequest.intentName = 'NoMoreSteps';

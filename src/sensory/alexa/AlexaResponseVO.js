@@ -32,7 +32,7 @@ class AlexaResponseVO {
     }
 		// add Session Attributes
 		res.sessionAttributes = sessionData
-		console.log('res: ' + JSON.stringify(res));
+		//console.log('res: ' + JSON.stringify(res));
 
 		return res;
   }
