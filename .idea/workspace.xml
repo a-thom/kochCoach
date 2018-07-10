@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c351cca-b5cf-4100-ab32-80fe7a2e88f6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Execution.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Execution.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaComplexAnswer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaComplexAnswer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaErrorCodes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaErrorCodes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaRequestVO.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaRequestVO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/exampleREQ.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/exampleREQ.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/skill.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/skill.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,8 +72,8 @@
       <file leaf-file-name="AlexaInitialisation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+            <state relative-caret-position="210">
+              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -70,8 +81,8 @@
       <file leaf-file-name="config.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="65" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
+            <state relative-caret-position="30">
+              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -342,12 +353,12 @@
       <workItem from="1530532446429" duration="339000" />
       <workItem from="1530736834039" duration="296000" />
       <workItem from="1531067516339" duration="9211000" />
-      <workItem from="1531253406199" duration="1459000" />
+      <workItem from="1531253406199" duration="2810000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63328000" />
+    <option name="totallyTimeSpent" value="64679000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -730,15 +741,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+        <state relative-caret-position="210">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="65" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
+        <state relative-caret-position="30">
+          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
         </state>
       </provider>
     </entry>
