@@ -24,6 +24,7 @@ class AlexaInitialisation {
           let rows
           try {
             rows = JSON.parse(body).values
+            console.log(body);
           } catch (err) { return reject('ERROR -> while parsing vui', err)}
 
           if (page === 'VUI')
