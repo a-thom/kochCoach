@@ -4,7 +4,7 @@
     <list default="true" id="0c351cca-b5cf-4100-ab32-80fe7a2e88f6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Execution.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Execution.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,8 +35,8 @@
       <file leaf-file-name="Execution.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Execution.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="369" column="19" selection-start-line="369" selection-start-column="19" selection-end-line="369" selection-end-column="19" />
+            <state relative-caret-position="453">
+              <caret line="366" column="6" selection-start-line="366" selection-start-column="6" selection-end-line="366" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -59,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlexaInitialisation.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AlexaInitialisation.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+            <state relative-caret-position="735">
+              <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -91,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlexaResponseVO.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AlexaResponseVO.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+            <state relative-caret-position="135">
+              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -120,6 +120,7 @@
       <find>shouldendsession</find>
       <find>context</find>
       <find>undefined</find>
+      <find>rezept</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -128,7 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js" />
         <option value="$PROJECT_DIR$/src/sensory/alexa/AlexaComplexAnswer.js" />
         <option value="$PROJECT_DIR$/src/sensory/alexa/AlexaRequestVO.js" />
         <option value="$USER_HOME$/.profile" />
@@ -137,8 +137,9 @@
         <option value="$PROJECT_DIR$/src/sensory/alexa/AlexaStore.js" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.json" />
         <option value="$PROJECT_DIR$/KochCoach-Intentmodel.json" />
-        <option value="$PROJECT_DIR$/src/Execution.js" />
         <option value="$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js" />
+        <option value="$PROJECT_DIR$/src/Execution.js" />
+        <option value="$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js" />
       </list>
     </option>
   </component>
@@ -165,7 +166,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="46" />
     <option name="y" value="22" />
-    <option name="width" value="1164" />
+    <option name="width" value="1385" />
     <option name="height" value="1418" />
   </component>
   <component name="ProjectView">
@@ -330,12 +331,12 @@
       <workItem from="1529528720511" duration="17158000" />
       <workItem from="1530532446429" duration="339000" />
       <workItem from="1530736834039" duration="296000" />
-      <workItem from="1531067516339" duration="2907000" />
+      <workItem from="1531067516339" duration="8948000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55565000" />
+    <option name="totallyTimeSpent" value="61606000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -347,11 +348,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="46" y="22" width="1164" height="1418" extended-state="0" />
+    <frame x="46" y="22" width="1385" height="1418" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.1317184" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.2227913" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -363,11 +364,11 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3297587" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49171752" visible="true" weight="0.17290552" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49205148" visible="true" weight="0.19955324" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Database" order="3" weight="0.32940406" />
       <window_info id="Learn" order="2" />
-      <window_info id="Structure" order="1" sideWeight="0.5082825" side_tool="true" weight="0.17290552" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.5079485" side_tool="true" visible="true" weight="0.19955324" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24950884" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -379,6 +380,36 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" x="0" y="379" width="1400" height="128" id="Version Control" order="7" weight="0.16666667" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24950884" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49171752" visible="true" weight="0.14349112" />
+      <window_info id="Learn" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.2227913" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Structure" order="1" sideWeight="0.5082825" side_tool="true" weight="0.17290552" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32940406" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3297587" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3294271" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994638" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.32936758" />
+      <window_info id="Favorites" order="7" sideWeight="0.32867134" side_tool="true" weight="0.17811158" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -619,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaComplexAnswer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -692,17 +716,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Execution.js">
+    <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="369" column="19" selection-start-line="369" selection-start-column="19" selection-end-line="369" selection-end-column="19" />
+        <state relative-caret-position="135">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaResponseVO.js">
+    <entry file="file://$PROJECT_DIR$/src/Execution.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+        <state relative-caret-position="453">
+          <caret line="366" column="6" selection-start-line="366" selection-start-column="6" selection-end-line="366" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sensory/alexa/AlexaInitialisation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
         </state>
       </provider>
     </entry>

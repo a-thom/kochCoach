@@ -97,7 +97,7 @@ class Execution {
 
 	/**  @param {AlexaRequestVO} alexaRequestVO */
 	static Start (alexaRequest) {
-		alexaRequest.savePermanent('phase', 'searching');
+		alexaRequest.savePermanent('phase', 'recipe');
 		//read slot resolution from JSON request
 		let slotObject = alexaRequest.slots;
 		let slots = {};
@@ -366,9 +366,6 @@ class Execution {
 
 			console.log('instruction: ' + instruction);
 			if (typeof instruction === 'string') {
-				// if (stepDuration < 3) {
-				// } else {
-				// }
 				alexaRequest.vRes = {instruction: instruction};
 			} else {
 				alexaRequest.intentName = 'NoMoreSteps';
@@ -388,7 +385,11 @@ class Execution {
 			// let columnDur = `dur${step}`
 			let instruction = alexaRequest.dataBase[index][column];
 			// let stepDuration = alexaRequest.dataBase[index][columnDur];
-			alexaRequest.vRes = { instruction: instruction};
+			if (typeof instruction === 'string') {
+				alexaRequest.vRes = {instruction: instruction};
+			} else {
+				alexaRequest.intentName = 'NoMoreSteps';
+			}
 		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );
@@ -399,16 +400,20 @@ class Execution {
 		if(alexaRequest.getPermanent('index') === undefined) {
 			alexaRequest.intentName = 'NoRecipeSelected';
 		} else {
-			let step = alexaRequest.getPermanent('step') - 1 ;
-			let index = alexaRequest.getPermanent('index');
-			alexaRequest.savePermanent('step', step);
+			if(alexaRequest.getPermanent('step')<=1){
+				alexaRequest.intentName = 'negativeStep';
+			} else {
+				let step = alexaRequest.getPermanent('step') - 1 ;
+				let index = alexaRequest.getPermanent('index');
+				alexaRequest.savePermanent('step', step);
 
-			let column = `step${step}`;
-			// let columnDur = `dur${step}`
-			let instruction = alexaRequest.dataBase[index][column];
-			// let stepDuration = alexaRequest.dataBase[index][columnDur];
-			console.log(instruction);
-			alexaRequest.vRes = { instruction: instruction};
+				let column = `step${step}`;
+				// let columnDur = `dur${step}`
+				let instruction = alexaRequest.dataBase[index][column];
+				// let stepDuration = alexaRequest.dataBase[index][columnDur];
+				console.log(instruction);
+				alexaRequest.vRes = { instruction: instruction};
+			}
 		}
 
 		return new Promise( resolve => resolve( alexaRequest ) );

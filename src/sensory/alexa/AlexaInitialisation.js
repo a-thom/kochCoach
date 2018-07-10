@@ -47,6 +47,7 @@ class AlexaInitialisation {
   }
 
   static createJsonObjects ( data ) {
+    console.log(data);
     let head   = data.shift();
     let result = [];
     let d, da, c;
